@@ -1,35 +1,20 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_leaves - counts the leaves in a binary tree
- * @tree: a pointer to the root node of the tree
+ * binary_tree_leaves - Counts the leaves in a binary tree.
  *
- * Return: number of leaves
+ * @tree: Pointer to a binary tree.
+ *
+ * Return: Number of leafs counts the leaves in a binary tree.
  */
+
 size_t binary_tree_leaves(const binary_tree_t *tree)
 {
-	size_t count = 0;
+	if (!tree)
+		return (0);
 
-	number_of_leaves(tree, &count);
+	if (!(tree->left) && !(tree->right))
+		return (1);
 
-	return (count);
-}
-
-/**
- * number_of_leaves - Computes the number of leaves in a binary tree
- * @tree: A pointer to the root node of the tree
- * @count: a pointer to the number of leaves
- *
- * Return: void
- */
-void number_of_leaves(const binary_tree_t *tree, size_t *count)
-{
-	if (tree == NULL)
-		return;
-
-	if (tree->left == NULL && tree->right == NULL)
-		(*count)++;
-
-	number_of_leaves(tree->left, count);
-	number_of_leaves(tree->right, count);
+	return (binary_tree_leaves(tree->left) + binary_tree_leaves(tree->right));
 }
